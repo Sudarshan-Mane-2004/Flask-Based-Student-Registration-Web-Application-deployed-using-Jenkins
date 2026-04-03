@@ -1,9 +1,7 @@
 pipeline {
     agent any
 
-    environment {
-        APP_PORT = '5000'
-    
+    stages {
 
         stage('Install Dependencies') {
             steps {
@@ -22,5 +20,6 @@ pipeline {
                 '''
             }
         }
+
     }
 }
