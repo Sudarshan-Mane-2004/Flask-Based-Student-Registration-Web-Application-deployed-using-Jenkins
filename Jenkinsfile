@@ -3,15 +3,7 @@ pipeline {
 
     environment {
         APP_PORT = '5000'
-    }
-
-    stages {
-
-        stage('Clone Repository') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Sudarshan-Mane-2004/Flask-Based-Student-Registration-Web-Application-deployed-using-Jenkins.git'
-            }
-        }
+    
 
         stage('Install Dependencies') {
             steps {
