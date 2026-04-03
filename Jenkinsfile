@@ -6,9 +6,14 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                sudo apt update
-                sudo apt install python3-pip -y
-                pip3 install -r requirements.txt
+                sudo apt update -y
+                sudo apt install python3-pip python3-venv -y
+
+                python3 -m venv venv
+                . venv/bin/activate
+
+                pip install --upgrade pip
+                pip install -r requirements.txt
                 '''
             }
         }
@@ -16,7 +21,9 @@ pipeline {
         stage('Run Flask App') {
             steps {
                 sh '''
-                nohup python3 app.py > app.log 2>&1 &
+                . venv/bin/activate
+                pkill -f app.py || true
+                nohup python app.py > app.log 2>&1 &
                 '''
             }
         }
